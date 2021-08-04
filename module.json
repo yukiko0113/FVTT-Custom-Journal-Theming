@@ -1,48 +1,62 @@
 {
-	"name": "custom-journal",
-	"title": "Custom Journal",
-	"description": "A custom take on the appearance of journal entries.",
-	"version": "1.2.1",
-	"author": "Sanyella",
-	"scripts": [],
-	"styles": [
-		"styles/custom-journal.css",
-		"styles/dark-mode.css",
-		"styles/dark-slate-journal.css",
-		"styles/handwritten-letter.css",
-		"styles/royal-journal.css",
-		"styles/sci-fi-one-journal.css",
-		"styles/sci-fi-two-journal.css",
-		"fonts/Anglo-text/stylesheet.css",
-		"fonts/Lovers-Quarrel/stylesheet.css",
-		"fonts/Montserrat-Regular/style.css",
-		"fonts/Play-Regular/style.css"
-	],
-	"esmodules": [
-		"scripts/custom-journal.js"
-	],
-	"languages": [
-		{
-			"lang": "en",
-			"name": "English",
-			"path": "lang/en.json"
-		},
-		{
-			"lang": "fr",
-			"name": "Français",
-			"path": "lang/fr.json"
-		},
-		{
-			"lang": "es",
-			"name": "Spanish",
-			"path": "lang/es.json"
-		}
-	],
-	"packs": [],
-	"url": "https://github.com/Sanyella/FVTT-Custom-Journal-Theming",
-	"manifest": "https://raw.githubusercontent.com/Sanyella/FVTT-Custom-Journal-Theming/master/module.json",
-	"download": "https://github.com/Sanyella/FVTT-Custom-Journal-Theming/releases/download/1.2.1/custom-journal.zip",
-	"bugs": "https://github.com/Sanyella/FVTT-Custom-Journal-Theming/issues",
-	"compatibleCoreVersion": "0.7.4",
-	"minimumCoreVersion": "0.6.6"
+  "name": "custom-journal",
+  "title": "Custom Journal",
+  "description": "A custom take on the appearance of journal entries.",
+  "author": "Sanyella",
+  "authors": [],
+  "url": "https://github.com/Sanyella/FVTT-Custom-Journal-Theming",
+  "bugs": "https://github.com/Sanyella/FVTT-Custom-Journal-Theming/issues",
+  "flags": {},
+  "version": "1.2.1",
+  "minimumCoreVersion": "0.8.0",
+  "compatibleCoreVersion": "0.8.8",
+  "scripts": [],
+  "esmodules": [
+    "scripts/custom-journal.js"
+  ],
+  "styles": [
+    "styles/custom-journal.css",
+    "styles/dark-mode.css",
+    "styles/dark-slate-journal.css",
+    "styles/handwritten-letter.css",
+	"styles/handwritten-letter-two.css",
+    "styles/royal-journal.css",
+    "styles/sci-fi-one-journal.css",
+    "styles/sci-fi-two-journal.css",
+    "fonts/Anglo-text/stylesheet.css",
+    "fonts/Lovers-Quarrel/stylesheet.css",
+    "fonts/Montserrat-Regular/style.css",
+    "fonts/Play-Regular/style.css",
+	"fonts/Sacramento-Regular/stylesheet.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "fr",
+      "name": "Français",
+      "path": "lang/fr.json"
+    },
+    {
+      "lang": "es",
+      "name": "Spanish",
+      "path": "lang/es.json"
+    }
+  ],
+  "packs": [],
+  "system": [],
+  "dependencies" : [
+      {
+        "name": "Lib: Document Sheet Registrar",
+        "manifest": "https://github.com/League-of-Foundry-Developers/document-sheet-registrar/releases/latest/download/module.json"
+      }
+  ],
+  "socket": false,
+  "manifest": "https://raw.githubusercontent.com/Fair-Strides/FVTT-Custom-Journal-Theming/master/module.json",
+  "download": "https://github.com/Fair-Strides/FVTT-Custom-Journal-Theming/releases/download/1.3/custom-journal.zip",
+  "protected": false,
+  "coreTranslation": false
 }

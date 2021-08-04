@@ -1,3 +1,11 @@
+# 1.3.0
+
+- Made compatible with Foundry 0.8.x, starting with 0.8.8.
+
+- Added the League of Foundry Developers' Document Sheet Registrar as a dependency to allow registering sheets much easier going forward
+
+- Added a second Handwritten Letter option to use the Sacramento Regular font (an alternate cursive that might be easier to read).
+
 # 1.2.1
 
 - Added Spanish translation, thanks to José E. Lozano!

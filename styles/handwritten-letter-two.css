@@ -1,0 +1,91 @@
+/*
+    Thanks, attributions & links
+    *************************************
+    Thanks to both Stryxin's dark mode module (https://github.com/Stryxin/dnd5edark-foundryvtt)
+    and Felix's BetterNPCSheet module (https://github.com/syl3r86/BetterNPCSheet5e)
+    which have both helped me tremendously in understanding how to structure my own
+    module.
+    Lovers Quarrel font: https://fonts.google.com/specimen/Lovers+Quarrel
+    Anglo-text font: https://www.1001fonts.com/anglo-text-font.html
+        For more drop-cap fonts: https://www.1001fonts.com/drop-caps-fonts.html
+        And how to add them: https://www.pagecloud.com/blog/how-to-add-custom-fonts-to-any-website
+    Dark background 1: https://www.publicdomainpictures.net/en/view-image.php?image=169017&picture=grunge-background
+    Parchment 1, by FilterForge : https://www.flickr.com/photos/filterforge/9340122531
+
+*/
+
+body {
+    --handwritten-two-background-texture-image: url(../textures/parchment-1.jpg);
+    --handwritten-two-base-font: 'sacramento-regular'
+}
+
+/************************************************
+	Headers and text
+************************************************/
+
+.handwritten-letter-two h1, .handwritten-letter-two h2, .handwritten-letter-two .editor-content>h3, .handwritten-letter-two .editor-content>h4, .handwritten-letter-two .editor-content>h5, .handwritten-letter-two .editor-content>h6, .handwritten-letter-two .editor-content>p, .handwritten-letter-two .editor-content>ul {
+    border-bottom: 0px;
+    font-family: var(--handwritten-two-base-font);
+    line-height: 85%;
+}
+
+.handwritten-letter-two h1 {
+    font-size: 3em;
+}
+
+.handwritten-letter-two h2 {
+    font-size: 2.8em;
+}
+
+.handwritten-letter-two .editor-content>h3 {
+    font-size: 2.4em;
+}
+
+.handwritten-letter-two .editor-content>p, .handwritten-letter-two .editor-content>ul {
+    font-size: 2.2em;
+}
+
+/* MEME minimal compatibility */
+
+.handwritten-letter-two .CodeMirror p, 
+.handwritten-letter-two .CodeMirror ul {
+    font-family: var(--handwritten-two-base-font);
+    font-size: 2.2em;
+}
+
+/************************************************
+    Special text and highlights
+************************************************/
+
+/* Modifies Polyglot CSS */
+
+.handwritten-letter-two .polyglot-journal {
+    background-color: #b38e4c60;
+}
+
+/************************************************
+    Background and various window elements
+************************************************/
+
+/* Background */
+
+.handwritten-letter-two .window-content {
+    background: var(--handwritten-two-background-texture-image);
+    background-size: cover;
+}
+
+/*
+    One Journal compatibility
+*/
+
+/* Background with OneJournal */
+
+#OneJournalShell .handwritten-letter-two.one-journal-attached .window-content {
+    background: var(--handwritten-two-background-texture-image);
+}
+
+/* Entry title underline with OneJournal */
+
+/* .handwritten-letter-two.one-journal-attached form input[name="name"] {
+  border-width: 0;
+} */
