@@ -177,8 +177,12 @@ class SciFiTwoJournal extends CustomJournalSheet {
 	}
 }
 
-Hooks.once("ready", async() => {
-console.log("Custom Journals | Registering the module's sheets.")
+Hooks.on("preDocumentSheetRegistrarInit", (settings) => {
+  settings["JournalEntry"] = true;
+});
+
+Hooks.on("documentSheetRegistrarInit", (documentTypes) => {
+console.log("Custom Journals | Registering the module's sheets.");
 
 /*CUSTOMIZE
  * Here, register your sheet so it shows up properly in the dropdown, just change
