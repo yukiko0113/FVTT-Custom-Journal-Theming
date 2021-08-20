@@ -1,3 +1,11 @@
+# 1.3.2
+
+- Making use of new hooks from Document Sheet Registrar.
+
+# 1.3.1
+
+- Hotfix for the Document Sheet Registrar dependency.
+
 # 1.3.0
 
 - Made compatible with Foundry 0.8.x, starting with 0.8.8.
