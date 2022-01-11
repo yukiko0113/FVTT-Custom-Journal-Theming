@@ -2,12 +2,22 @@
   "name": "custom-journal",
   "title": "Custom Journal",
   "description": "A custom take on the appearance of journal entries.",
-  "author": "Sanyella",
-  "authors": [],
-  "url": "https://github.com/Fair-Strides/FVTT-Custom-Journal-Theming",
+  "author": "Fair Strides",
+  "authors": [
+    {
+      "name": "Sanyella",
+	  "url": "https://github.com/Sanyella"
+    },
+    {
+      "name": "Fair Strides",
+      "url": "https://github.com/Fair-Strides",
+      "discord": "Fair Strides#2148"
+    }
+  ],
+  "url": "https://github.com/Fair-Strides/FVTT-Custom-Journal-Theming/tree/v9-journals",
   "bugs": "https://github.com/Fair-Strides/FVTT-Custom-Journal-Theming/issues",
   "flags": {},
-  "version": "1.4.0",
+  "version": "1.4.2",
   "minimumCoreVersion": "9",
   "compatibleCoreVersion": "9",
   "scripts": [],
@@ -23,11 +33,7 @@
     "styles/royal-journal.css",
     "styles/sci-fi-one-journal.css",
     "styles/sci-fi-two-journal.css",
-    "fonts/Anglo-text/stylesheet.css",
-    "fonts/Lovers-Quarrel/stylesheet.css",
-    "fonts/Montserrat-Regular/style.css",
-    "fonts/Play-Regular/style.css",
-    "fonts/Sacramento-Regular/stylesheet.css"
+    "fonts/stylesheet.css"
   ],
   "languages": [
     {
@@ -48,10 +54,16 @@
   ],
   "packs": [],
   "system": [],
-  "dependencies": [],
+  "dependencies": [
+    {
+      "name": "lib-wrapper",
+      "manifest": "https://github.com/ruipin/fvtt-lib-wrapper/releases/download/latest/module.json",
+      "type": "module"
+    }
+  ],
   "socket": false,
-  "manifest": "https://raw.githubusercontent.com/Fair-Strides/FVTT-Custom-Journal-Theming/master/module.json",
-  "download": "https://github.com/Fair-Strides/FVTT-Custom-Journal-Theming/archive/refs/tags/1.4.0.zip",
+  "manifest": "https://raw.githubusercontent.com/Fair-Strides/FVTT-Custom-Journal-Theming/v9-journals/module.json",
+  "download": "https://github.com/Fair-Strides/FVTT-Custom-Journal-Theming/archive/refs/tags/1.4.2.zip",
   "protected": false,
   "coreTranslation": false,
   "library": false

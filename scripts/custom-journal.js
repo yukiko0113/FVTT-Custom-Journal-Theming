@@ -61,6 +61,64 @@ class SciFiTwoJournal extends JournalSheet {
 }
 
 Hooks.on("init", (documentTypes) => {
+console.log("Custom Journals | Registering the module's TinyMCE Styles.");
+
+libWrapper.register('custom-journal', 'JournalSheet.prototype.activateEditor', function(wrapped, name, options={}, ...args) {
+    if (!options.style_formats) 
+    {
+        options.style_formats = [
+            {
+                title: "Custom",
+                items: [
+                    {
+                        title: "Secret",
+                        block: 'section',
+                        classes: 'secret',
+                        wrapper: true
+                    }
+                ]
+            }
+        ];
+    }
+    options.style_formats.push(
+        {
+            title: game.i18n.localize("custom-journal.StyleSection"),
+            items: [
+                {
+                    title: game.i18n.localize("custom-journal.DropCap"),
+                    inline: 'span',
+                    classes: 'drop-cap' 
+                },
+                {
+                    title: game.i18n.localize("custom-journal.SimpleBlock"),
+                    block: 'section',
+                    classes: 'simple-block',
+                    wrapper: true
+                },
+                {
+                    title: game.i18n.localize("custom-journal.SimpleBlockFloat"),
+                    block: 'section',
+                    classes: 'simple-block-float',
+                    wrapper: true
+                },
+                {
+                    title: game.i18n.localize("custom-journal.RidgedBlock"),
+                    block: 'section',
+                    classes: 'ridged-block',
+                    wrapper: true
+                },
+                {
+                    title: game.i18n.localize("custom-journal.RidgedBlockFloat"),
+                    block: 'section',
+                    classes: 'ridged-block-float',
+                    wrapper: true
+                }
+            ]
+        }
+    );
+  return wrapped(name, options={}, ...args);
+}, 'WRAPPER');
+
 console.log("Custom Journals | Registering the module's sheets.");
 
 /*CUSTOMIZE

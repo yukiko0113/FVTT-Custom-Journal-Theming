@@ -1,3 +1,13 @@
+# 1.4.1
+
+- Fixed styles section missing from journals' TinyMCE (Thanks arcanist for the assist!)
+- Reorganized files for clearer structure (mostly fonts)
+
+# 1.4.0
+
+- Compatible with v9 of Foundry
+- Removed depependency on Document Sheet Registrar due to changes in Core Foundry.
+
 # 1.3.2
 
 - Making use of new hooks from Document Sheet Registrar.
