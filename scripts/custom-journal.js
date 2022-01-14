@@ -125,6 +125,12 @@ console.log("Custom Journals | Registering the module's sheets.");
  * Here, register your sheet so it shows up properly in the dropdown, just change
  * for your sheet name and you're good to go
  */
+Journal.registerSheet("journals", CustomJournalSheet, {
+	label: game.i18n.localize("custom-journal.CustomJournalSheet"),
+	types: ["base"],
+	makeDefault: true
+});
+
 Journal.registerSheet("journals", DarkModeJournal, {
 	label: game.i18n.localize("custom-journal.DarkMode"),
 	types: ["base"],
