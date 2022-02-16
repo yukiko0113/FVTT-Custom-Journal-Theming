@@ -4,6 +4,7 @@
 	"custom-journal.DarkSlate": "Ardoise",
 	"custom-journal.Royal": "Royal",
 	"custom-journal.HandwrittenLetter": "Lettre manuscrite",
+	"custom-journal.HandwrittenLetterTwo": "Lettre manuscrite 2",
 	"custom-journal.SciFiOne": "Sci-Fi 1",
 	"custom-journal.SciFiTwo": "Sci-Fi 2",
 	
@@ -12,5 +13,7 @@
 	"custom-journal.SimpleBlock": "Bloc simple",
 	"custom-journal.SimpleBlockFloat": "Block simple flottant",
 	"custom-journal.RidgedBlock": "Bloc à bordure épaisse",
-	"custom-journal.RidgedBlockFloat": "Bloc à bordure épaisse flottant"
+	"custom-journal.RidgedBlockFloat": "Bloc à bordure épaisse flottant",
+	"custom-journal.ImageJournal": "Custom Image",
+	"custom-journal.VideoJournal": "Custom Video"
 }

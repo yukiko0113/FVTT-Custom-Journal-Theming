@@ -4,6 +4,7 @@
 	"custom-journal.DarkSlate": "Modo Pizarra",
 	"custom-journal.Royal": "Regio",
 	"custom-journal.HandwrittenLetter": "Escritura a Mano",
+	"custom-journal.HandwrittenLetterTwo": "Escritura a Mano Dos",
 	"custom-journal.SciFiOne": "Ci-Fi Uno",
 	"custom-journal.SciFiTwo": "Ci-Fi Dos",
 	
@@ -12,5 +13,7 @@
 	"custom-journal.SimpleBlock": "Bloque Simple",
 	"custom-journal.SimpleBlockFloat": "Bloque Simple Flotante",
 	"custom-journal.RidgedBlock": "Bloque Marco",
-	"custom-journal.RidgedBlockFloat": "Bloque Marco Flotante"
+	"custom-journal.RidgedBlockFloat": "Bloque Marco Flotante",
+	"custom-journal.ImageJournal": "Custom Image",
+	"custom-journal.VideoJournal": "Custom Video"
 }

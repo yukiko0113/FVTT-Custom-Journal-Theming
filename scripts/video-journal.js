@@ -1,9 +1,11 @@
-export class ImageJournal extends DocumentSheet {
+import { VideoPopout } from './video-popout.js';
+
+export class VideoJournal extends DocumentSheet {
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			baseApplication: 'JournalSheet',
 			classes: [],
-			template: 'modules/custom-journal/templates/customimage.html',
+			template: 'modules/custom-journal/templates/customvideo.html',
 			closeOnSubmit: false,
 			submitOnClose: true,
 			viewPermission: CONST.ENTITY_PERMISSIONS.NONE,
@@ -13,6 +15,7 @@ export class ImageJournal extends DocumentSheet {
 	handlers = {};
 
 	getFlag(flag) {
+//		console.log(`${flag}: `, this.object.getFlag('custom-journal', flag));
 		return this.object.getFlag('custom-journal', flag);
 	}
 
@@ -26,21 +29,25 @@ export class ImageJournal extends DocumentSheet {
 
 	async setDefaultFlags() {
 		await this.setDefaultFlag('img', '');
-		await this.setDefaultFlag('opacity', '1');
 		await this.setDefaultFlag('locked', true);
 		await this.setDefaultFlag('draggable', false);
-		await this.setDefaultFlag('image_position', { width: 0, height: 0, top: 0, left: 0 });
+		await this.setDefaultFlag('video_position', { width: 0, height: 0, top: 0, left: 0 });
 		await this.setDefaultFlag('editor_position', { width: 0, height: 0, top: 0, left: 0 });
 		await this.setDefaultFlag('text-color', '#ffffff');
-		await this.setDefaultFlag('image_rotation', '0');
+		await this.setDefaultFlag('video_rotation', '0');
+		await this.setDefaultFlag('video_height', '480');
+		await this.setDefaultFlag('video_width', '480');
+		await this.setDefaultFlag('video_auto', true);
+		await this.setDefaultFlag('video_loop', true);
+		await this.setDefaultFlag('video_controls', true);
 		await this.setDefaultFlag('editor_rotation', '0');
 	}
 
 	/** @inheritdoc */
 	getData(options) {
 		const data = super.getData(options);
-		data.title = this.title; // Needed for image mode
-		data.image = this.getFlag('img');
+		data.title = this.title; // Needed for video mode
+		data.video = this.getFlag('img');
 		data.folders = game.folders.filter((f) => f.data.type === 'JournalEntry' && f.displayed);
 		return data;
 	}
@@ -59,7 +66,7 @@ export class ImageJournal extends DocumentSheet {
 
 	async _render(force, options = {}) {
 		let reset = false;
-		if (!this.getFlag('image_position')) reset = true;
+		if (!this.getFlag('video_position')) reset = true;
 		await this.setDefaultFlags();
 
 		if (!this.object.compendium && !this.object.testUserPermission(game.user, this.options.viewPermission)) {
@@ -93,18 +100,22 @@ export class ImageJournal extends DocumentSheet {
 		mergeObject(this.options, options, { insertKeys: false });
 
 		// Get the existing HTML element and application data used for rendering
-		const img = this.getFlag('img') || 'modules/custom-journal/textures/bg.png';
+		const img = this.getFlag('img') || 'modules/custom-journal/textures/bg.webm';
 		const windowData = {
 			id: this.id,
 			appId: this.appId,
 			img,
 			data: this.object.data,
-			opacity: this.getFlag('opacity'),
+			videoHeight: this.getFlag('video_height'),
+			videoWidth: this.getFlag('video_width'),
+			videoAuto: this.getFlag('video_auto'),
+			videoLoop: this.getFlag('video_loop'),
+			videoControls: this.getFlag('video_controls'),
 			headerButtons: this._getHeaderButtons(),
 			userButtons: this._getUserButtons(),
 			textcolor: this.getFlag('text-color'),
 			editorRotation: this.getFlag('editor_rotation'),
-			imgRotation: this.getFlag('image_rotation'),
+			imgRotation: this.getFlag('video_rotation'),
 		};
 		windowData.buttons = [...windowData.headerButtons, ...windowData.userButtons];
 		options = mergeObject(options, windowData);
@@ -140,7 +151,7 @@ export class ImageJournal extends DocumentSheet {
 		await this._onRender(html, options, renderinner);
 
 		setTimeout(() => {
-			html.find('.custom-image-buttons a').click((event) => {
+			html.find('.custom-video-buttons a').click((event) => {
 				event.preventDefault();
 				const button = options.buttons.find((b) => event.currentTarget.classList.contains(b.class));
 				button.onclick(event);
@@ -174,20 +185,20 @@ export class ImageJournal extends DocumentSheet {
 	}
 
 	async _onRender(html, options, renderinner) {
-		const bgImage = this.getFlag('img') || 'modules/custom-journal/textures/bg.png';
-		const position = await ImagePopout.getPosition(bgImage);
+		const bgVideo = this.getFlag('img') || 'modules/custom-journal/textures/bg.webm';
+		const position = await VideoPopout.getPosition(bgVideo);
 		mergeObject(options, position);
-		options.classes = this.constructor.defaultOptions.classes.concat(ImagePopout.defaultOptions.classes);
+		options.classes = this.constructor.defaultOptions.classes.concat(VideoPopout.defaultOptions.classes);
 
 		this.setPosition(this.position);
 		this.bringToTop();
-
-		// Make Image Draggable when Locked
-		const img = html.find('.background-image');
+		
+		// Make Video Draggable when Locked
+		const img = html.find('.background-video');
 		const editor = html.find('#editor');
 		if (!renderinner) {
 			this.handlers.editor_lockhandler = new DraggableElement(this, editor, undefined, true, true, this.getFlag('editor_position'));
-			this.handlers.image_lockhandler = new DraggableElement(this, img, undefined, true, true, this.getFlag('image_position'));
+			this.handlers.video_lockhandler = new DraggableElement(this, img, undefined, true, true, this.getFlag('video_position'));
 			this.handlers.draghandler = new DraggableExtended(this, img);
 		}
 	}
@@ -267,12 +278,12 @@ export class ImageJournal extends DocumentSheet {
 			this.setFlag(`${flag}_position`, el_pos);
 			this.setFlag(`${flag}_rotation`, regex.exec(el.style.transform)[0]);
 		};
-		check('.background-image', 'image');
+		check('.background-video', 'video');
 		check('#editor', 'editor');
 	}
 
 	async resetPosition() {
-		const img_pos = await ImagePopout.getPosition(this.getFlag('img') || 'modules/custom-journal/textures/bg.png');
+		const img_pos = await VideoPopout.getPosition(this.getFlag('img') || 'modules/custom-journal/textures/bg.webm');
 		const ratio = img_pos.width / img_pos.height;
 		if (img_pos.width > 1000) {
 			img_pos.width = 1000;
@@ -282,8 +293,8 @@ export class ImageJournal extends DocumentSheet {
 			img_pos.height = 600;
 			img_pos.width = 600 * ratio;
 		}
-		this.handlers.image_lockhandler.setPosition({ ...img_pos, top: 0, left: 0 });
-		this.handlers.image_lockhandler.setRotation(0);
+		this.handlers.video_lockhandler.setPosition({ ...img_pos, top: 0, left: 0 });
+		this.handlers.video_lockhandler.setRotation(0);
 		this.handlers.editor_lockhandler.setPosition({ width: 0, height: 0, top: 0, left: 0 });
 		this.handlers.editor_lockhandler.setRotation(0);
 	}
@@ -313,10 +324,10 @@ export class ImageJournal extends DocumentSheet {
 				onclick: (ev) => this._onConfigureSheet(ev),
 			});
 			buttons.push({
-				label: 'Image',
-				class: 'configure-image',
+				label: 'Video',
+				class: 'configure-video',
 				icon: 'fas fa-magic',
-				onclick: (ev) => this._onConfigImage(ev),
+				onclick: (ev) => this._onConfigVideo(ev),
 			});
 			buttons.push({
 				label: 'Unlock',
@@ -326,7 +337,7 @@ export class ImageJournal extends DocumentSheet {
 					const handlers = app.handlers;
 					const html = ev.target.parentElement.parentElement;
 					const btn = ev.target;
-					const img = html.querySelector('.background-image');
+					const img = html.querySelector('.background-video');
 					const editor = html.querySelector('#editor');
 					this.locked = !this.locked;
 					btn.text = this.locked ? 'Unlock' : 'Lock';
@@ -338,13 +349,13 @@ export class ImageJournal extends DocumentSheet {
 						// Remove the drag event listeners
 						handlers.draghandler.removeListeners();
 
-						// Make the Image and Text Editor resizable and draggable when unlocked
-						handlers.image_lockhandler.activateListeners();
+						// Make the Video and Text Editor resizable and draggable when unlocked
+						handlers.video_lockhandler.activateListeners();
 						handlers.editor_lockhandler.activateListeners();
 
 						return;
 					}
-					handlers.image_lockhandler.removeListeners();
+					handlers.video_lockhandler.removeListeners();
 					handlers.editor_lockhandler.removeListeners();
 
 					handlers.draghandler.activateListeners();
@@ -368,7 +379,7 @@ export class ImageJournal extends DocumentSheet {
 		if (game.user.isGM) {
 			buttons.push({
 				label: 'JOURNAL.ActionShow',
-				class: 'share-image',
+				class: 'share-video',
 				icon: 'fas fa-eye',
 				onclick: (ev) => this._onShowPlayers(ev),
 			});
@@ -382,22 +393,28 @@ export class ImageJournal extends DocumentSheet {
 		return this.object.show(this._sheetMode, true);
 	}
 
-	async _onConfigImage() {
+	async _onConfigVideo() {
 		this._lock();
+		console.log("flags", this);
+		console.log("img ", this.getFlag('img'));
 		const img = this.getFlag('img') || '';
-		const opacity = this.getFlag('opacity');
 		const textcolor = this.getFlag('text-color');
-		const imageRotation = this.getFlag('image_rotation');
+		const videoHeight = this.getFlag('video_height');
+		const videoWidth = this.getFlag('video_width');
+		const videoAuto = this.getFlag('video_auto');
+		const videoLoop = this.getFlag('video_loop');
+		const videoControls = this.getFlag('video_controls');
+		const videoRotation = this.getFlag('video_rotation');
 		const editorRotation = this.getFlag('editor_rotation');
 		//const resizable = this.object.getFlag('custom-journal', 'resizable');
-		const html = await getTemplate('modules/custom-journal/templates/customimage-config.html');
+		const html = await getTemplate('modules/custom-journal/templates/customvideo-config.html');
 		const journal = this.object;
 		const name = journal.name;
 
 		const app = new Dialog(
 			{
-				title: `${this.object.name}: Custom Image Configuration`,
-				content: html({ img, opacity, name, textcolor, imageRotation, editorRotation }),
+				title: `${this.object.name}: Custom Video Configuration`,
+				content: html({ img, videoHeight, videoWidth, videoAuto, videoLoop, videoControls, name, textcolor, videoRotation, editorRotation }),
 				buttons: {
 					yes: {
 						icon: `<i class="fas fa-magic"></i>`,
@@ -412,28 +429,63 @@ export class ImageJournal extends DocumentSheet {
 								sheet.render(true);
 							}
 							const img = html.querySelector('#img').value;
-							const opacity = html.querySelector('#opacity').value;
 							const newName = html.querySelector('#name').value;
 							const textcolor = html.querySelector('#textcolor').value || '#ffffff';
-							const imageRotation = html.querySelector('#image-rotation').value;
+							const videoRotation = html.querySelector('#video-rotation').value;
+							const videoHeight = html.querySelector('#video-height').value;
+							const videoWidth = html.querySelector('#video-width').value;
+							const videoAuto = html.querySelector('#video-auto').checked;
+							const videoLoop = html.querySelector('#video-loop').checked;
+							const videoControls = html.querySelector('#video-controls').checked;
 							const editorRotation = html.querySelector('#editor-rotation').value;
 
 							const updates = {};
 							if (newName !== name) updates.name = newName;
-							if (opacity !== this.getFlag('opacity')) journal.sheet.setFlag('opacity', opacity);
 							if (textcolor !== this.getFlag('text-color')) this.setFlag('text-color', textcolor);
-							if (imageRotation !== this.getFlag('image_rotation')) this.setFlag('image_rotation', imageRotation);
+							if (videoHeight !== this.getFlag('video_height')) this.setFlag('video_height', videoHeight);
+							if (videoWidth !== this.getFlag('video_width')) this.setFlag('video_width', videoWidth);
+							if (videoAuto !== this.getFlag('video_auto')) this.setFlag('video_auto', videoAuto);
+							if (videoLoop !== this.getFlag('video_loop')) this.setFlag('video_loop', videoLoop);
+							if (videoControls !== this.getFlag('video_controls')) this.setFlag('video_controls', videoControls);
+							if (videoRotation !== this.getFlag('video_rotation')) this.setFlag('video_rotation', videoRotation);
 							if (editorRotation !== this.getFlag('editor_rotation')) this.setFlag('editor_rotation', editorRotation);
-
+							
 							if (Object.keys(updates).length) await journal.update(updates);
+
+								console.log("videoAuto: ", videoAuto);
+								console.log("Data videoAuto: ", this.getFlag('video_auto'));
 
 							if (img !== this.getFlag('img')) {
 								this.setFlag('img', img);
-								Hooks.once('renderImageJournal', async () => {
+								Hooks.once('renderVideoJournal', async () => {
 									await sheet.resetPosition();
 									sheet.savePosition();
 								});
 							}
+/*
+							if (videoAuto !== this.getFlag('video_auto')) {
+								if(videoAuto !== false) {
+									console.log("Turning it on.");
+									 document.getElementById("video-source").setAttribute("autoplay", true); 
+//									 html.getElementById("video-auto").setAttribute("checked", true); 
+								}
+								else {
+									console.log("Turning it off.");
+									document.getElementById("video-source").removeAttribute("autoplay"); 
+//									html.getElementById("video-auto").removeAttribute("checked");
+								}
+								this.setFlag('video_auto', videoAuto);
+							}
+							if (videoLoop !== this.getFlag('video_loop')) {
+								if(videoLoop !== false) {
+									 document.getElementById("video-source").setAttribute("loop", true); 
+								}
+								else {
+									document.getElementById("video-source").removeAttribute("loop"); 
+								}
+								this.setFlag('video_loop', videoLoop);
+							}
+*/
 							renderSheet();
 						},
 					},
@@ -479,11 +531,17 @@ export class ImageJournal extends DocumentSheet {
 					const img = html.querySelector('#img');
 					const picker = html.querySelector('button.file-picker');
 					const filePicker = new FilePicker({
-						type: 'image',
+						type: 'video',
 						field: img,
 						displayMode: 'tiles',
 					});
 					picker.addEventListener('click', (ev) => filePicker.render(true));
+/*					
+					const autoCheck = html.getElementById("#video-auto");
+					autoCheck.addEventListener('click', (ev) => {
+//						if(videoAuto) {
+					});
+*/
 				},
 			},
 			{ jQuery: false }

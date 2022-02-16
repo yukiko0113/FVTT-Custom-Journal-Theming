@@ -4,14 +4,16 @@
 	"custom-journal.DarkSlate": "Dark Slate",
 	"custom-journal.Royal": "Royal",
 	"custom-journal.HandwrittenLetter": "Handwritten Letter",
+	"custom-journal.HandwrittenLetterTwo": "Handwritten Letter Two",
 	"custom-journal.SciFiOne": "Sci-Fi One",
 	"custom-journal.SciFiTwo": "Sci-Fi Two",
-
+	
 	"custom-journal.StyleSection": "Custom Journal",
 	"custom-journal.DropCap": "Drop Cap",
 	"custom-journal.SimpleBlock": "Simple Block",
 	"custom-journal.SimpleBlockFloat": "Simple Block Float",
 	"custom-journal.RidgedBlock": "Ridged Block",
 	"custom-journal.RidgedBlockFloat": "Ridged Block Float",
-	"custom-journal.ImageJournal": "Custom Image"
+	"custom-journal.ImageJournal": "Custom Image",
+	"custom-journal.VideoJournal": "Custom Video"
 }

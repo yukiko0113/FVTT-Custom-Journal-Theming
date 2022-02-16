@@ -1,3 +1,29 @@
+# 1.4.1
+
+- Fixed styles section missing from journals' TinyMCE (Thanks arcanist for the assist!)
+- Reorganized files for clearer structure (mostly fonts)
+
+# 1.4.0
+
+- Compatible with v9 of Foundry
+- Removed depependency on Document Sheet Registrar due to changes in Core Foundry.
+
+# 1.3.2
+
+- Making use of new hooks from Document Sheet Registrar.
+
+# 1.3.1
+
+- Hotfix for the Document Sheet Registrar dependency.
+
+# 1.3.0
+
+- Made compatible with Foundry 0.8.x, starting with 0.8.8.
+
+- Added the League of Foundry Developers' Document Sheet Registrar as a dependency to allow registering sheets much easier going forward
+
+- Added a second Handwritten Letter option to use the Sacramento Regular font (an alternate cursive that might be easier to read).
+
 # 1.2.1
 
 - Added Spanish translation, thanks to José E. Lozano!

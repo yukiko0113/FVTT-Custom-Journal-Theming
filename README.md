@@ -1,6 +1,8 @@
 # FVTT Custom Journal Theming - The Journals of your Dreams!
 
-> **Please note that, as this is written, I am no longer maintaining this, and have not for a while. Whoever feels like forking the repo and toying with it is more than welcome to do so. I haven't found how to remove/deprecate this on the official places beyond the versioning already outdated, but if admins are going through this, this can safely be unlisted, from my point of view. Thanks everyone, and happy gaming!**
+> **Everything past here was written by the original author, Sanyella. I am the current maintainer for this 0.8.x and League of Foundry Developers version of this module**
+***
+> **IF YOU ARE STILL ON 1.0.11 OR LOWER, YOU WILL MOST LIKELY HAVE TO REINSTALL MANUALLY, SINCE I MADE A MISTAKE IN THE MANIFEST LINK, BREAKING THE USUAL UPDATE PROCESS. SORRY ABOUT THE INCONVENIENCE!**
 
 Welcome to your own personal playground to design your own wonderful-looking journals! 
 Not only did I want to make journals more interesting, I also wanted to to allow them
@@ -18,15 +20,16 @@ In addition to the regular reskin provided by the different themes, you can now 
 
 If you encounter any bug or want to suggest improvements, don't hesitate to tell me either 
 here through the issues or on Discord (do tag me if reaching out through the Foundry Discord
-if you want me to see your message @Sanyella#3760). Do take into account though that this is
-still an early version which needs a lot more work. I'll do my best to fix these issues as 
-fast as possible, but take note that it may still take a certain time before I have the time 
-to fix something.
+if you want me to see your message @Sanyella#3760 \[or the current maintainer Fair Strides,
+@FairStrides#2148\]). Do take into account though that this is still an early version which
+needs a lot more work. I'll do my best to fix these issues as fast as possible, but take note
+that it may still take a certain time before I have the time to fix something.
 
 - **Bug**: The drop down for the "default" journal sheet doesn't currently work. I have yet to 
 find out why, so please be patient. Rest assured, individual sheet themes *are* working.
 
-- **Compatibility issue**: The button for MINDMAP doesn't show when using Custom Journal. While MEME can now be used with minimal level of compatibility (as in, you can actually read the text and have the general look of themes), it doesn't have buttons for the custom styles provided by Custom Journal. There is also a know issue with Data Toolbox.
+- **Compatibility issue**: The button for MINDMAP doesn't show when using Custom Journal. There
+is also a know issue with Data Toolbox.
 
 *Theme-specific issues aren't going to be listed here, but will be available and appropriately 
 tagged in the GitHub issues.*
@@ -57,8 +60,6 @@ I might also be open to adding your styles, if you so wish. Just reach out to me
 
 People who have helped me in fixing various things within the module: Magnus/elizeuangelo, jakvike.
 
-People who have contributed translations: José E. Lozano.
-
 Also shoutout to all those who have and still help me brainstorm and understand things in the Discord.
 
 **Big thanks to all of you! You rock!**
@@ -74,6 +75,8 @@ awesomness and in such an open way, with code easy to navigate and understand.
 Lovers Quarrel font: https://fonts.google.com/specimen/Lovers+Quarrel
 
 Anglo-text font: https://www.1001fonts.com/anglo-text-font.html
+
+Sacramento-Regular: https://fonts.google.com/specimen/Sacramento
   
 ### Textures
 
